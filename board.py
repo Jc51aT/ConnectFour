@@ -71,42 +71,42 @@ class Board:
 	
 			
 
-
-new_board = Board()
-new_board.display_board()
-
-current_player = 0
-game_done = False
-
-while(not game_done):
-	# get current player input
-	
-	user_move = 111
-	
-	while True:
-		try:
-			print("Enter Column:", end=' ')
-			user_move = int(input())
-		except ValueError:
-			print("Not an integer!")
-			continue
-		else:
-			break
-
-	while user_move > new_board.cols or user_move < 0:
-		print("Enter a valid column")
-		print("Enter Column:", end=' ')
-		user_move = int(input())
-
-	while(new_board.is_column_full(user_move)):
-			print("Column full, Try another column.")
-			print("Enter Column:", end=' ')
-			user_move = int(input())
-
-	new_board.add_piece(user_move, current_player)
+if __name__ == "__main__":
+	new_board = Board()
 	new_board.display_board()
-	if new_board.has_won(current_player):
-		game_done = True
-		print("Player {current_player} has won!".format(current_player = "Player 1" if current_player == 0 else "Player 2"))
-	else:
-		current_player = (current_player + 1) % 2
+
+	current_player = 0
+	game_done = False
+
+	while(not game_done):
+	# get current player input
+
+		user_move = 111
+
+		while True:
+			try:
+				print("Enter Column:", end=' ')
+				user_move = int(input())
+			except ValueError:
+				print("Not an integer!")
+				continue
+			else:
+				break
+
+		while user_move > new_board.cols or user_move < 0:
+			print("Enter a valid column")
+			print("Enter Column:", end=' ')
+			user_move = int(input())
+
+		while(new_board.is_column_full(user_move)):
+				print("Column full, Try another column.")
+				print("Enter Column:", end=' ')
+				user_move = int(input())
+
+		new_board.add_piece(user_move, current_player)
+		new_board.display_board()
+		if new_board.has_won(current_player):
+			game_done = True
+			print("Player {current_player} has won!".format(current_player = "Player 1" if current_player == 0 else "Player 2"))
+		else:
+			current_player = (current_player + 1) % 2
