@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# student #: 5920616 Tyler Applin
 # This program implements the game Connect 4 with an AI that runs on Minimax
 import math
 import time
