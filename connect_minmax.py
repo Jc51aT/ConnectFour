@@ -163,51 +163,54 @@ class Board:
 					 best_move = score
 		
 		return best_move
-		
-		
-new_board = Board()
-new_board.display_board()
-#Player 1 is always the human
-current_player = 1
-game_done = False
 
-while(not game_done):
+def main():
+	new_board = Board()
+	new_board.display_board()
+	#Player 1 is always the human
+	current_player = 1
+	game_done = False
 
-	if current_player == 1:
-		# get current player input
-		while True:
-			
-			try:
+	while(not game_done):
+
+		if current_player == 1:
+			# get current player input
+			while True:
+				
+				try:
+					print("Enter Column:", end=' ')
+					user_move = int(input())
+				except ValueError:
+					print("Not an integer!")
+					continue
+				else:
+					break
+
+			while user_move > new_board.cols or user_move < 0 or new_board.is_column_full(user_move):
+				print("Enter a valid column")
 				print("Enter Column:", end=' ')
 				user_move = int(input())
-			except ValueError:
-				print("Not an integer!")
-				continue
-			else:
-				break
 
-		while user_move > new_board.cols or user_move < 0 or new_board.is_column_full(user_move):
-			print("Enter a valid column")
-			print("Enter Column:", end=' ')
-			user_move = int(input())
+			new_board.add_piece(user_move, current_player)
+			new_board.display_board()
+			
+		else:
+			#get cpu move
+			cpu_move = new_board.minimax(5, current_player)
+			new_board.add_piece(cpu_move[0], current_player)
+			print("The computer played in column {}".format(cpu_move[0]))
+			new_board.display_board()
+			
+		#check for winner
+		if new_board.has_won(current_player):
+			game_done = True
+			print("{current_player} has won!".format(current_player = "CPU" if current_player == 0 else "Player 1"))
+		#switch player turn
+		else:
+			current_player = (current_player + 1) % 2
 
-		new_board.add_piece(user_move, current_player)
-		new_board.display_board()
-		
-	else:
-		#get cpu move
-		cpu_move = new_board.minimax(5, current_player)
-		new_board.add_piece(cpu_move[0], current_player)
-		print("The computer played in column {}".format(cpu_move[0]))
-		new_board.display_board()
-		
-	#check for winner
-	if new_board.has_won(current_player):
-		game_done = True
-		print("{current_player} has won!".format(current_player = "CPU" if current_player == 0 else "Player 1"))
-	#switch player turn
-	else:
-		current_player = (current_player + 1) % 2
+if __name__ == "__main__":
+	main()
 
 	
 	

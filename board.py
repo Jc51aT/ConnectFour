@@ -68,10 +68,7 @@ class Board:
 				if self.the_board[r][c] == player and self.the_board[r-1][c+1] == player and self.the_board[r-2][c+2] == player and self.the_board[r-3][c+3] == player:
 					return True
 
-	
-			
-
-if __name__ == "__main__":
+def main():
 	new_board = Board()
 	new_board.display_board()
 
@@ -110,3 +107,8 @@ if __name__ == "__main__":
 			print("Player {current_player} has won!".format(current_player = "Player 1" if current_player == 0 else "Player 2"))
 		else:
 			current_player = (current_player + 1) % 2
+
+			
+
+if __name__ == "__main__":
+	main()
